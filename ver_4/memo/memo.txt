@@ -1,0 +1,1 @@
+BrC1=CC2=NC3=CC(C(O)=O)=C(C(O)=O)C=C3N=C2C=C1

@@ -1,0 +1,1 @@
+mv ${filename}.log ${filename}_imag.log
