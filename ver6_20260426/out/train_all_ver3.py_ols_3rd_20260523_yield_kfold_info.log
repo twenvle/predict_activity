@@ -1,0 +1,83 @@
+2026-05-27 00:39:03,029 - INFO - target: yield
+2026-05-27 00:39:03,030 - INFO - method: ols
+2026-05-27 00:39:03,030 - INFO - n_rows_after_dropna: 27
+2026-05-27 00:39:03,030 - INFO - n_descriptors: 15
+2026-05-27 00:39:03,030 - INFO - max_len_descriptors_in_model: 4
+
+2026-05-27 00:39:03,030 - INFO - Loaded checkpoint: 0 folds completed
+2026-05-27 00:39:03,091 - INFO - [kfold] fold 1/5
+2026-05-27 00:39:03,091 - INFO - length of combinations: 1436
+2026-05-27 00:40:22,320 - INFO - best_combi: ('sasa', 'o_nbo_charge', 'lumo_ev', 'hbd')
+2026-05-27 00:40:22,320 - INFO - best_inner_cv_mae: 1.2137346854963675
+2026-05-27 00:40:22,320 - INFO - best_best_estimator: Pipeline(steps=[('scaler', StandardScaler()), ('ols', LinearRegression())])
+2026-05-27 00:40:22,320 - INFO - best_intercept_: 12.10645940476189
+2026-05-27 00:40:22,320 - INFO - best_coef_: [2.2290354146114857, 1.257683081875338, -1.3849680744751927, -1.6097731814618594]
+2026-05-27 00:40:22,322 - INFO - pred=11.8714, true=13.3200, abs_err=1.4486
+2026-05-27 00:40:22,323 - INFO - pred=12.3518, true=13.2900, abs_err=0.9382
+2026-05-27 00:40:22,323 - INFO - pred=10.8131, true=8.9500, abs_err=1.8631
+2026-05-27 00:40:22,323 - INFO - pred=14.7104, true=13.9000, abs_err=0.8104
+2026-05-27 00:40:22,323 - INFO - pred=8.8456, true=5.7000, abs_err=3.1456
+2026-05-27 00:40:22,323 - INFO - pred=13.6430, true=10.9200, abs_err=2.7230
+2026-05-27 00:40:22,323 - INFO - [kfold] fold 1/5 selected=sasa,o_nbo_charge,lumo_ev,hbd
+
+2026-05-27 00:40:22,397 - INFO - [kfold] fold 2/5
+2026-05-27 00:40:22,397 - INFO - length of combinations: 1426
+2026-05-27 00:41:38,349 - INFO - best_combi: ('sasa', 'lumo_ev', 'gap_ev', 'hbd')
+2026-05-27 00:41:38,349 - INFO - best_inner_cv_mae: 0.9814793533948215
+2026-05-27 00:41:38,349 - INFO - best_best_estimator: Pipeline(steps=[('scaler', StandardScaler()), ('ols', LinearRegression())])
+2026-05-27 00:41:38,349 - INFO - best_intercept_: 11.354078452380957
+2026-05-27 00:41:38,349 - INFO - best_coef_: [2.7761925275273005, -1.4802239646763542, 0.6247972947548873, -2.012099581693685]
+2026-05-27 00:41:38,351 - INFO - pred=11.5632, true=11.8000, abs_err=0.2368
+2026-05-27 00:41:38,351 - INFO - pred=8.3407, true=12.4900, abs_err=4.1493
+2026-05-27 00:41:38,351 - INFO - pred=13.4311, true=12.8000, abs_err=0.6311
+2026-05-27 00:41:38,351 - INFO - pred=15.5578, true=18.1800, abs_err=2.6222
+2026-05-27 00:41:38,351 - INFO - pred=10.6520, true=14.7600, abs_err=4.1080
+2026-05-27 00:41:38,351 - INFO - pred=9.1709, true=11.8500, abs_err=2.6791
+2026-05-27 00:41:38,351 - INFO - [kfold] fold 2/5 selected=sasa,lumo_ev,gap_ev,hbd
+
+2026-05-27 00:41:38,422 - INFO - [kfold] fold 3/5
+2026-05-27 00:41:38,422 - INFO - length of combinations: 1362
+2026-05-27 00:42:51,728 - INFO - best_combi: ('sasa', 'homo_ev', 'lumo_ev', 'hbd')
+2026-05-27 00:42:51,728 - INFO - best_inner_cv_mae: 1.3241419130725216
+2026-05-27 00:42:51,729 - INFO - best_best_estimator: Pipeline(steps=[('scaler', StandardScaler()), ('ols', LinearRegression())])
+2026-05-27 00:42:51,729 - INFO - best_intercept_: 11.6525294318182
+2026-05-27 00:42:51,729 - INFO - best_coef_: [2.995136374511638, -1.222688257246976, -1.5589284972550876, -1.9623739891469048]
+2026-05-27 00:42:51,731 - INFO - pred=12.1813, true=11.5300, abs_err=0.6513
+2026-05-27 00:42:51,731 - INFO - pred=19.7003, true=15.6500, abs_err=4.0503
+2026-05-27 00:42:51,731 - INFO - pred=11.3571, true=11.5000, abs_err=0.1429
+2026-05-27 00:42:51,731 - INFO - pred=11.1012, true=13.4600, abs_err=2.3588
+2026-05-27 00:42:51,731 - INFO - pred=13.5838, true=11.8200, abs_err=1.7638
+2026-05-27 00:42:51,731 - INFO - [kfold] fold 3/5 selected=sasa,homo_ev,lumo_ev,hbd
+
+2026-05-27 00:42:51,795 - INFO - [kfold] fold 4/5
+2026-05-27 00:42:51,795 - INFO - length of combinations: 1362
+2026-05-27 00:44:04,875 - INFO - best_combi: ('sasa', 'dipole_moment_debye', 'lumo_ev', 'hbd')
+2026-05-27 00:44:04,875 - INFO - best_inner_cv_mae: 1.348233678007411
+2026-05-27 00:44:04,875 - INFO - best_best_estimator: Pipeline(steps=[('scaler', StandardScaler()), ('ols', LinearRegression())])
+2026-05-27 00:44:04,875 - INFO - best_intercept_: 12.717529431818184
+2026-05-27 00:44:04,875 - INFO - best_coef_: [1.805281883564982, -0.8448605031292292, -1.9157877112912929, -1.0671862337564704]
+2026-05-27 00:44:04,876 - INFO - pred=8.0574, true=7.2000, abs_err=0.8574
+2026-05-27 00:44:04,877 - INFO - pred=10.3165, true=10.0000, abs_err=0.3165
+2026-05-27 00:44:04,877 - INFO - pred=9.7306, true=9.4300, abs_err=0.3006
+2026-05-27 00:44:04,877 - INFO - pred=6.7897, true=0.8600, abs_err=5.9297
+2026-05-27 00:44:04,877 - INFO - pred=10.2087, true=13.0400, abs_err=2.8313
+2026-05-27 00:44:04,877 - INFO - [kfold] fold 4/5 selected=sasa,dipole_moment_debye,lumo_ev,hbd
+
+2026-05-27 00:44:04,955 - INFO - [kfold] fold 5/5
+2026-05-27 00:44:04,955 - INFO - length of combinations: 1438
+2026-05-27 00:45:22,367 - INFO - best_combi: ('sasa', 'omega', 'hbd')
+2026-05-27 00:45:22,367 - INFO - best_inner_cv_mae: 1.545952201150581
+2026-05-27 00:45:22,367 - INFO - best_best_estimator: Pipeline(steps=[('scaler', StandardScaler()), ('ols', LinearRegression())])
+2026-05-27 00:45:22,367 - INFO - best_intercept_: 11.474999999999998
+2026-05-27 00:45:22,367 - INFO - best_coef_: [2.9371308845453346, 2.090407041295888, -2.025904677873025]
+2026-05-27 00:45:22,368 - INFO - pred=8.4498, true=8.7356, abs_err=0.2859
+2026-05-27 00:45:22,368 - INFO - pred=20.4860, true=17.6900, abs_err=2.7960
+2026-05-27 00:45:22,368 - INFO - pred=12.2742, true=12.9700, abs_err=0.6958
+2026-05-27 00:45:22,368 - INFO - pred=14.1896, true=13.5500, abs_err=0.6396
+2026-05-27 00:45:22,368 - INFO - pred=15.5123, true=14.9200, abs_err=0.5923
+2026-05-27 00:45:22,368 - INFO - [kfold] fold 5/5 selected=sasa,omega,hbd
+
+2026-05-27 00:45:22,376 - INFO - mae: 1.835846018729993
+2026-05-27 00:45:22,376 - INFO - rmse: 2.371036021855602
+2026-05-27 00:45:22,376 - INFO - r2: 0.5443288176322498
+2026-05-27 00:45:22,376 - INFO - permutation test 1/20

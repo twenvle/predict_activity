@@ -145,7 +145,7 @@ def molecular_volume(df: pd.DataFrame, logdata: Any, i: int) -> pd.DataFrame:
 
 
 def get_final_nbo_charges(logfile_path) -> list[float]:
-    # NBO chargeはcclibを用いるとなぜか構造最適化前の
+    # NBO chargeはcclibを用いると構造最適化前の
     # 値を取得してしまうので逆から探索する
     with open(logfile_path, "r") as f:
         lines = f.readlines()
