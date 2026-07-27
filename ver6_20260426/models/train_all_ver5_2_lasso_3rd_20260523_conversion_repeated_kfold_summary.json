@@ -1,0 +1,108 @@
+{
+  "n_rows_after_dropna": 27,
+  "n_descriptors": 15,
+  "descriptors": [
+    "sasa",
+    "polar",
+    "h_nbo_charge",
+    "o_nbo_charge",
+    "molecular_volume_A3",
+    "dipole_moment_debye",
+    "homo_ev",
+    "lumo_ev",
+    "gap_ev",
+    "omega",
+    "3and6",
+    "4and5",
+    "logp",
+    "hbd",
+    "hba"
+  ],
+  "target": "conversion",
+  "method": "lasso",
+  "threshold": 0.8,
+  "max_len_descriptors_in_model": 4,
+  "n_combinations": 1426,
+  "cv_metrics": {
+    "repeated_kfold": {
+      "mae": 4.419424665537377,
+      "rmse": 5.862379079417954,
+      "r2": 0.10468662328919287
+    }
+  },
+  "selection_summaries": {
+    "repeated_kfold": {
+      "feature_frequency": {
+        "o_nbo_charge": 45,
+        "3and6": 37,
+        "hbd": 37,
+        "sasa": 13,
+        "logp": 4,
+        "hba": 10,
+        "gap_ev": 4,
+        "omega": 5,
+        "lumo_ev": 1,
+        "h_nbo_charge": 10,
+        "molecular_volume_A3": 2,
+        "homo_ev": 6,
+        "dipole_moment_debye": 1,
+        "polar": 2
+      },
+      "selected_set_frequency": {
+        "o_nbo_charge,3and6,hbd": 9,
+        "sasa,o_nbo_charge,logp,hbd": 3,
+        "o_nbo_charge,3and6,hba": 8,
+        "o_nbo_charge,gap_ev,3and6,hbd": 3,
+        "o_nbo_charge,omega,3and6,hbd": 3,
+        "o_nbo_charge,lumo_ev,3and6,hbd": 1,
+        "sasa,o_nbo_charge,hbd": 3,
+        "h_nbo_charge,o_nbo_charge,molecular_volume_A3,3and6": 2,
+        "h_nbo_charge,o_nbo_charge,3and6,hbd": 6,
+        "sasa,omega,hbd": 1,
+        "sasa,homo_ev,hbd,hba": 1,
+        "h_nbo_charge,o_nbo_charge,3and6": 1,
+        "sasa,dipole_moment_debye,homo_ev,hbd": 1,
+        "sasa,polar,o_nbo_charge,hbd": 1,
+        "sasa,o_nbo_charge,omega,hbd": 1,
+        "h_nbo_charge,o_nbo_charge,3and6,hba": 1,
+        "sasa,polar,o_nbo_charge,gap_ev": 1,
+        "homo_ev,3and6,logp,hbd": 1,
+        "o_nbo_charge,homo_ev,3and6,hbd": 1,
+        "sasa,o_nbo_charge,homo_ev,hbd": 1,
+        "homo_ev,3and6,hbd": 1
+      }
+    }
+  },
+  "permutation_test": null,
+  "external_test_metrics": null,
+  "final_best_on_full_data": {
+    "combi": [
+      "o_nbo_charge",
+      "3and6",
+      "hba"
+    ],
+    "inner_cv_mae": 3.3399947041898947,
+    "coef_": [
+      3.3077845620138655,
+      -4.000217663290688,
+      -1.8250493079118608
+    ],
+    "intercept_": 27.245185185185196,
+    "alpha": 0.08685113737513521,
+    "l1_ratio": 1.0
+  },
+  "final_best_combi_on_full_data": [
+    "o_nbo_charge",
+    "3and6",
+    "hba"
+  ],
+  "elapsed_seconds": 4955.376,
+  "fold_metrics_summary": {
+    "mae_mean": 4.429752222311618,
+    "mae_std": 1.5406738988283672,
+    "rmse_mean": 5.516287592240321,
+    "rmse_std": 2.089776529066817,
+    "r2_mean": -0.6379094633996832,
+    "r2_std": 1.5289974025757567
+  }
+}

@@ -6,6 +6,7 @@ from typing import Any, Literal
 import joblib
 import numpy as np
 import pandas as pd
+from rdkit import Chem
 from scipy.stats import norm
 from sklearn.neighbors import NearestNeighbors
 
@@ -15,22 +16,46 @@ TARGET = {"yield", "conversion", "selectivity"}
 AdMode = Literal["none", "hard", "soft"]
 
 
+def canonicalize_smiles(s):
+    if pd.isna(s):
+        return None
+    mol = Chem.MolFromSmiles(str(s))
+    if mol is None:
+        return None
+    return Chem.MolToSmiles(mol, canonical=True)
+
+
 # ── 獲得関数 ──────────────────────────────────────────────────────────────────
 
 
 def calculate_ei(mu, sigma, current_best, xi):
-    sigma_safe = np.maximum(np.asarray(sigma, dtype=float), _SIGMA_FLOOR)
-    improvement = np.asarray(mu, dtype=float) - float(current_best) - float(xi)
-    z = improvement / sigma_safe
-    ei = improvement * norm.cdf(z) + sigma_safe * norm.pdf(z)
-    return np.where(sigma_safe <= _SIGMA_FLOOR, 0.0, ei)
+    mu = np.asarray(mu, dtype=float)
+    sigma = np.asarray(sigma, dtype=float)
+    improvement = mu - float(current_best) - float(xi)
+
+    ei = np.zeros_like(improvement, dtype=float)
+    nonzero = sigma > _SIGMA_FLOOR
+
+    z = improvement[nonzero] / sigma[nonzero]
+    ei[nonzero] = improvement[nonzero] * norm.cdf(z) + sigma[nonzero] * norm.pdf(z)
+
+    ei[~nonzero] = np.maximum(improvement[~nonzero], 0.0)
+    return ei
 
 
 def calculate_pi(mu, sigma, current_best, xi):
-    sigma_safe = np.maximum(np.asarray(sigma, dtype=float), _SIGMA_FLOOR)
-    z = (np.asarray(mu, dtype=float) - float(current_best) - float(xi)) / sigma_safe
-    pi = norm.cdf(z)
-    return np.where(sigma_safe <= _SIGMA_FLOOR, 0.0, pi)
+    mu = np.asarray(mu, dtype=float)
+    sigma = np.asarray(sigma, dtype=float)
+    improvement = mu - float(current_best) - float(xi)
+
+    pi = np.zeros_like(improvement, dtype=float)
+    nonzero = sigma > _SIGMA_FLOOR
+
+    z = improvement[nonzero] / sigma[nonzero]
+    pi[nonzero] = norm.cdf(z)
+
+    pi[~nonzero] = (improvement[~nonzero] > 0).astype(float)
+    return pi
 
 
 def calculate_ucb(mu, sigma, beta):
@@ -93,9 +118,13 @@ def _predict_mu_sigma(
     if method in {"gpr", "blr"}:
         mu, sigma_raw = model.predict(X_query_scaled, return_std=True)
 
-    elif method in {"ols", "ridge", "lasso", "elasticnet", "svr"}:
+    elif method in {"ols", "ridge", "lasso", "elasticnet", "pls", "svr"}:
         mu = model.predict(X_query_scaled)
         y_train_pred = model.predict(X_train_scaled)
+
+        mu = np.asarray(mu).ravel()
+        y_train_pred = np.asarray(y_train_pred).ravel()
+
         residuals = y_train - y_train_pred
         rmse = float(np.sqrt(np.mean(residuals**2)))
         sigma_raw = np.full(len(mu), max(rmse, _SIGMA_FLOOR))
@@ -124,8 +153,9 @@ def attach_known_flags(candidate_df, train_df):
         known_by_cas = candidate_df["cas"].astype(str).isin(train_cas)
 
     if "smiles" in candidate_df.columns and "smiles" in train_df.columns:
-        train_smiles = set(train_df["smiles"].dropna().astype(str))
-        known_by_smiles = candidate_df["smiles"].astype(str).isin(train_smiles)
+        train_smiles = set(train_df["smiles"].map(canonicalize_smiles).dropna())
+        candidate_smiles = candidate_df["smiles"].map(canonicalize_smiles)
+        known_by_smiles = candidate_smiles.isin(train_smiles)
 
     return known_by_cas, known_by_smiles
 
@@ -167,17 +197,36 @@ def predict(
 
     summary = json.loads(summary_path.read_text(encoding="utf-8"))
     # GPR以外は sigma_ キーが存在しないため get() でデフォルト 1.0
-    sigma_scale = float(summary["final_best_on_full_data"].get("sigma_", 1.0))
+    if method == "gpr":
+        sigma_scale = float(summary["final_best_on_full_data"].get("sigma_", 1.0))
+    else:
+        sigma_scale = 1.0
 
     model = estimator.named_steps[method]
     scaler = estimator.named_steps.get("scaler")  # スケーラーなしのパイプラインにも対応
     descriptors = summary["final_best_combi_on_full_data"]
 
     # ── 訓練データ準備 ─────────────────────────────────────────────────────
+    missing_train_cols = [
+        col for col in descriptors + [target] if col not in train_df.columns
+    ]
+    if missing_train_cols:
+        raise KeyError(f"train_df に必要な列がありません: {missing_train_cols}")
+
+    missing_candidate_cols = [
+        col for col in descriptors if col not in candidate_df.columns
+    ]
+    if missing_candidate_cols:
+        raise KeyError(
+            f"candidate_df に必要な記述子列がありません: {missing_candidate_cols}"
+        )
+
     train_df = train_df.dropna(subset=descriptors + [target]).reset_index(drop=True)
 
-    if target not in train_df.columns:
-        raise KeyError(f"train_df に '{target}' 列が見つかりません。")
+    if train_df.empty:
+        raise ValueError(
+            "欠損除去後の train_df が空です。記述子列または target 列の欠損を確認してください。"
+        )
 
     current_best_y = float(train_df[target].max())
 
@@ -212,6 +261,15 @@ def predict(
     valid_mask = candidate_df[descriptors].notna().all(axis=1)
     valid_idx = output_df.index[valid_mask]
 
+    if len(valid_idx) == 0:
+        today = date.today().strftime("%Y%m%d")
+        output_path = (
+            Path(__file__).resolve().parent / f"out/{today}_{method}_output.csv"
+        )
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_df.to_csv(output_path, index=False)
+        return output_df, output_path
+
     known_by_cas, known_by_smiles = attach_known_flags(candidate_df, train_df)
     known_any = known_by_cas | known_by_smiles
     output_df["known_any"] = known_any
@@ -228,10 +286,10 @@ def predict(
     mu, sigma_raw = _predict_mu_sigma(
         method, model, X_query_scaled, X_train_scaled, y_train
     )
-    if not method == "blr":
+    if method == "gpr":
         sigma_cal = sigma_raw * sigma_scale
     else:
-        sigma_cal = sigma_raw  # BayesianRidge はすでにキャリブレーションされている前提
+        sigma_cal = sigma_raw  # BayesianRidge はすでにキャリブレーションされている前提なのでsigma_scaleをかける必要なし
 
     # AD計算
     train_knn_dist = compute_train_knn_distances(X_train_scaled, ad_k)
@@ -298,7 +356,10 @@ def predict(
     ).reset_index(drop=True)
 
     today = date.today().strftime("%Y%m%d")  # 関数内で取得（モジュールレベルから移動）
-    output_path = Path(__file__).resolve().parent / f"out/{today}_{method}_output.csv"
+    output_path = (
+        Path(__file__).resolve().parent.parent
+        / f"out/{today}_{method}_{target}_output.csv"
+    )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_df.to_csv(output_path, index=False)
 

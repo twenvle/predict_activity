@@ -1,0 +1,145 @@
+{
+  "n_rows_after_dropna": 27,
+  "n_descriptors": 15,
+  "descriptors": [
+    "sasa",
+    "polar",
+    "h_nbo_charge",
+    "o_nbo_charge",
+    "molecular_volume_A3",
+    "dipole_moment_debye",
+    "homo_ev",
+    "lumo_ev",
+    "gap_ev",
+    "omega",
+    "3and6",
+    "4and5",
+    "logp",
+    "hbd",
+    "hba"
+  ],
+  "target": "selectivity",
+  "method": "pls",
+  "threshold": 0.8,
+  "max_len_descriptors_in_model": 4,
+  "n_combinations": 1426,
+  "cv_metrics": {
+    "kfold": {
+      "mae": 10.364344048974301,
+      "rmse": 15.458054341448687,
+      "r2": -0.7896981802372274
+    }
+  },
+  "selection_summaries": {
+    "kfold": {
+      "feature_frequency": {
+        "o_nbo_charge": 4,
+        "homo_ev": 2,
+        "4and5": 1,
+        "molecular_volume_A3": 1,
+        "3and6": 3,
+        "hba": 1,
+        "dipole_moment_debye": 2,
+        "logp": 1,
+        "h_nbo_charge": 2,
+        "omega": 1
+      },
+      "selected_set_frequency": {
+        "o_nbo_charge,homo_ev,4and5": 1,
+        "o_nbo_charge,molecular_volume_A3,3and6,hba": 1,
+        "o_nbo_charge,dipole_moment_debye,3and6,logp": 1,
+        "h_nbo_charge,dipole_moment_debye,homo_ev,omega": 1,
+        "h_nbo_charge,o_nbo_charge,3and6": 1
+      }
+    }
+  },
+  "permutation_test": null,
+  "external_test_metrics": null,
+  "final_best_on_full_data": {
+    "combi": [
+      "polar",
+      "o_nbo_charge",
+      "3and6",
+      "hba"
+    ],
+    "inner_cv_mae": 5.8266103094328265,
+    "y_loadings_": [
+      [
+        0.7886179402533792,
+        -0.12192850390584471,
+        0.0865159721370614
+      ]
+    ],
+    "x_loadings_": [
+      [
+        0.31157399326163787,
+        0.6534404681165596,
+        0.28124648024447463
+      ],
+      [
+        0.7061901354537433,
+        -0.28707498234134776,
+        -0.7205486160523501
+      ],
+      [
+        -0.6717798428922799,
+        -0.22103261029807733,
+        -0.714933914068935
+      ],
+      [
+        0.18377911404227126,
+        0.7344857324428565,
+        -0.32138013587083486
+      ]
+    ],
+    "intercept_": [
+      42.732962962962965
+    ],
+    "x_weights_": [
+      [
+        0.17708163703688115,
+        0.47300847530953727,
+        0.5771904770035993
+      ],
+      [
+        0.7391120028286249,
+        -0.11578592812599771,
+        -0.5479427975602651
+      ],
+      [
+        -0.646798458921147,
+        -0.08785931539157919,
+        -0.4260129061115771
+      ],
+      [
+        -0.06330319609803015,
+        0.8689863875989486,
+        -0.43025904718501107
+      ]
+    ],
+    "n_components": 3,
+    "coef_": [
+      [
+        1.4630885984630457,
+        6.748362804610016,
+        -6.485080223956031,
+        -2.5337959284009557
+      ]
+    ]
+  },
+  "final_best_combi_on_full_data": [
+    "polar",
+    "o_nbo_charge",
+    "3and6",
+    "hba"
+  ],
+  "elapsed_seconds": 1133.246,
+  "fold_metrics_summary": {
+    "mae_mean": 10.472880636989888,
+    "mae_std": 4.312480867345989,
+    "rmse_mean": 14.454938020054545,
+    "rmse_std": 6.85299106794562,
+    "r2_mean": -4.897873295312519,
+    "r2_std": 7.229445768416281
+  }
+}

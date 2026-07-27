@@ -1,0 +1,156 @@
+{
+  "n_rows_after_dropna": 27,
+  "n_descriptors": 15,
+  "descriptors": [
+    "sasa",
+    "polar",
+    "h_nbo_charge",
+    "o_nbo_charge",
+    "molecular_volume_A3",
+    "dipole_moment_debye",
+    "homo_ev",
+    "lumo_ev",
+    "gap_ev",
+    "omega",
+    "3and6",
+    "4and5",
+    "logp",
+    "hbd",
+    "hba"
+  ],
+  "target": "conversion",
+  "method": "pls",
+  "threshold": 0.8,
+  "max_len_descriptors_in_model": 4,
+  "n_combinations": 1426,
+  "cv_metrics": {
+    "repeated_kfold": {
+      "mae": 4.436402821248154,
+      "rmse": 5.904401966976931,
+      "r2": 0.09180499268579101
+    }
+  },
+  "selection_summaries": {
+    "repeated_kfold": {
+      "feature_frequency": {
+        "o_nbo_charge": 44,
+        "3and6": 36,
+        "hbd": 34,
+        "sasa": 14,
+        "polar": 2,
+        "hba": 13,
+        "gap_ev": 3,
+        "homo_ev": 8,
+        "omega": 5,
+        "h_nbo_charge": 11,
+        "molecular_volume_A3": 6,
+        "logp": 4,
+        "dipole_moment_debye": 1
+      },
+      "selected_set_frequency": {
+        "o_nbo_charge,3and6,hbd": 8,
+        "sasa,polar,o_nbo_charge,hbd": 2,
+        "o_nbo_charge,3and6,hba": 5,
+        "o_nbo_charge,gap_ev,3and6,hbd": 3,
+        "o_nbo_charge,homo_ev,3and6,hbd": 3,
+        "o_nbo_charge,omega,3and6,hbd": 2,
+        "h_nbo_charge,o_nbo_charge,3and6,hba": 5,
+        "sasa,o_nbo_charge,hbd": 3,
+        "h_nbo_charge,o_nbo_charge,molecular_volume_A3,3and6": 4,
+        "sasa,o_nbo_charge,logp,hbd": 2,
+        "sasa,molecular_volume_A3,homo_ev,hbd": 1,
+        "o_nbo_charge,molecular_volume_A3,3and6,logp": 1,
+        "h_nbo_charge,o_nbo_charge,3and6,hbd": 1,
+        "sasa,omega,hbd": 1,
+        "sasa,homo_ev,hbd,hba": 1,
+        "sasa,dipole_moment_debye,homo_ev,hbd": 1,
+        "sasa,o_nbo_charge,omega,hbd": 2,
+        "homo_ev,3and6,logp,hbd": 1,
+        "h_nbo_charge,o_nbo_charge,3and6": 1,
+        "o_nbo_charge,3and6,hbd,hba": 1,
+        "sasa,o_nbo_charge,hbd,hba": 1,
+        "homo_ev,3and6,hbd": 1
+      }
+    }
+  },
+  "permutation_test": null,
+  "external_test_metrics": null,
+  "final_best_on_full_data": {
+    "combi": [
+      "o_nbo_charge",
+      "homo_ev",
+      "3and6",
+      "hbd"
+    ],
+    "inner_cv_mae": 3.338230333144363,
+    "y_loadings_": [
+      [
+        -0.7761422511753626,
+        -0.16387279466341065
+      ]
+    ],
+    "x_loadings_": [
+      [
+        -0.7162079256043015,
+        0.4856910703613819
+      ],
+      [
+        0.40180344341435686,
+        -0.5236444398595694
+      ],
+      [
+        0.4196295903510619,
+        0.7001627529413816
+      ],
+      [
+        0.4717312528031822,
+        -0.012235074793810858
+      ]
+    ],
+    "intercept_": [
+      27.245185185185186
+    ],
+    "x_weights_": [
+      [
+        -0.5857349692762892,
+        0.48283869056318507
+      ],
+      [
+        0.26265036063651076,
+        -0.5149610629452757
+      ],
+      [
+        0.6108467168066627,
+        0.7076334402890744
+      ],
+      [
+        0.4634604863318293,
+        -0.03060746200110742
+      ]
+    ],
+    "n_components": 2,
+    "coef_": [
+      [
+        2.487097828504095,
+        -0.8122274720358854,
+        -3.823425316649094,
+        -2.3247191308363355
+      ]
+    ]
+  },
+  "final_best_combi_on_full_data": [
+    "o_nbo_charge",
+    "homo_ev",
+    "3and6",
+    "hbd"
+  ],
+  "elapsed_seconds": 9301.13,
+  "fold_metrics_summary": {
+    "mae_mean": 4.445630281560979,
+    "mae_std": 1.5044677485741982,
+    "rmse_mean": 5.563351443869615,
+    "rmse_std": 2.078901329271982,
+    "r2_mean": -0.676607425302664,
+    "r2_std": 1.5652354033729625
+  }
+}

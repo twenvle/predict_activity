@@ -1,0 +1,106 @@
+{
+  "n_rows_after_dropna": 27,
+  "n_descriptors": 15,
+  "descriptors": [
+    "sasa",
+    "polar",
+    "h_nbo_charge",
+    "o_nbo_charge",
+    "molecular_volume_A3",
+    "dipole_moment_debye",
+    "homo_ev",
+    "lumo_ev",
+    "gap_ev",
+    "omega",
+    "3and6",
+    "4and5",
+    "logp",
+    "hbd",
+    "hba"
+  ],
+  "target": "yield",
+  "method": "ridge",
+  "threshold": 0.8,
+  "max_len_descriptors_in_model": 4,
+  "n_combinations": 1426,
+  "cv_metrics": {
+    "repeated_kfold": {
+      "mae": 1.878854497080491,
+      "rmse": 2.4317947413566676,
+      "r2": 0.5206760940809325
+    }
+  },
+  "selection_summaries": {
+    "repeated_kfold": {
+      "feature_frequency": {
+        "sasa": 43,
+        "o_nbo_charge": 27,
+        "lumo_ev": 17,
+        "hbd": 45,
+        "omega": 29,
+        "h_nbo_charge": 5,
+        "dipole_moment_debye": 10,
+        "homo_ev": 8,
+        "3and6": 6,
+        "logp": 1,
+        "hba": 1,
+        "gap_ev": 1
+      },
+      "selected_set_frequency": {
+        "sasa,o_nbo_charge,lumo_ev,hbd": 1,
+        "sasa,o_nbo_charge,omega,hbd": 18,
+        "sasa,h_nbo_charge,omega,hbd": 1,
+        "sasa,omega,hbd": 4,
+        "sasa,dipole_moment_debye,omega,hbd": 3,
+        "sasa,homo_ev,lumo_ev,hbd": 5,
+        "h_nbo_charge,o_nbo_charge,lumo_ev,hbd": 1,
+        "sasa,dipole_moment_debye,lumo_ev,hbd": 4,
+        "o_nbo_charge,lumo_ev,3and6,hbd": 1,
+        "sasa,h_nbo_charge,o_nbo_charge,lumo_ev": 1,
+        "sasa,omega,logp,hbd": 1,
+        "o_nbo_charge,dipole_moment_debye,3and6,hbd": 1,
+        "h_nbo_charge,o_nbo_charge,omega,3and6": 1,
+        "sasa,lumo_ev,hbd": 1,
+        "h_nbo_charge,o_nbo_charge,lumo_ev,3and6": 1,
+        "sasa,omega,hbd,hba": 1,
+        "sasa,homo_ev,hbd": 2,
+        "o_nbo_charge,dipole_moment_debye,lumo_ev,3and6": 2,
+        "sasa,homo_ev,gap_ev,hbd": 1
+      }
+    }
+  },
+  "permutation_test": null,
+  "external_test_metrics": null,
+  "final_best_on_full_data": {
+    "combi": [
+      "sasa",
+      "o_nbo_charge",
+      "omega",
+      "hbd"
+    ],
+    "inner_cv_mae": 1.330139111258333,
+    "coef_": [
+      2.4701430314874515,
+      0.7561504394797294,
+      1.5708269086015798,
+      -1.5433308986195173
+    ],
+    "alpha": 0.8286427728546842,
+    "intercept_": 11.863542500000012
+  },
+  "final_best_combi_on_full_data": [
+    "sasa",
+    "o_nbo_charge",
+    "omega",
+    "hbd"
+  ],
+  "elapsed_seconds": 44776.089,
+  "fold_metrics_summary": {
+    "mae_mean": 1.8889110027948819,
+    "mae_std": 0.7206730435182392,
+    "rmse_mean": 2.29755112275469,
+    "rmse_std": 0.8362975179746669,
+    "r2_mean": 0.09175984569650909,
+    "r2_std": 0.7868573423717239
+  }
+}

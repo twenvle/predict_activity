@@ -344,20 +344,54 @@ def best_combination(
 
 def load_checkpoint(checkpoint_path: Path):
     if checkpoint_path.exists():
-        df = pd.read_csv(checkpoint_path)
-        completed_folds = set(df["fold"].astype(int).unique())
-        return df.to_dict("records"), completed_folds
-    return [], set()
+        with checkpoint_path.open("r", encoding="utf-8") as f:
+            checkpoint = json.load(f)
+
+        predictions = checkpoint.get("predictions", [])
+        fold_metrics = checkpoint.get("fold_metrics", [])
+
+        selected_descriptor_counter = Counter(
+            checkpoint.get("selected_descriptor_counter", {})
+        )
+
+        selected_set_counter = Counter(
+            {
+                tuple(k.split(",")): v
+                for k, v in checkpoint.get("selected_set_counter", {}).items()
+            }
+        )
+
+        completed_folds = {int(item["fold"]) for item in fold_metrics}
+
+        return (
+            predictions,
+            fold_metrics,
+            selected_descriptor_counter,
+            selected_set_counter,
+            completed_folds,
+        )
+
+    return [], [], Counter(), Counter(), set()
 
 
-def save_checkpoint(predictions, fold_metrics, checkpoint_path: Path):
-    payload = {
+def save_checkpoint(
+    predictions,
+    fold_metrics,
+    selected_descriptor_counter,
+    selected_set_counter,
+    checkpoint_path: Path,
+):
+    checkpoint = {
         "predictions": predictions,
         "fold_metrics": fold_metrics,
+        "selected_descriptor_counter": dict(selected_descriptor_counter),
+        "selected_set_counter": {
+            ",".join(k): v for k, v in selected_set_counter.items()
+        },
     }
 
-    with open(checkpoint_path, "w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
+    with checkpoint_path.open("w", encoding="utf-8") as f:
+        json.dump(checkpoint, f, ensure_ascii=False, indent=2)
 
 
 def nested_cv_evaluate(
@@ -375,18 +409,25 @@ def nested_cv_evaluate(
     inner_n_repeats: int = 10,
     random_state: int = 42,
 ) -> tuple[pd.DataFrame, dict, dict, pd.DataFrame, dict]:
-
     if checkpoint_path is not None:
-        predictions, completed_folds = load_checkpoint(checkpoint_path)
+        (
+            predictions,
+            fold_metrics,
+            selected_descriptor_counter,
+            selected_set_counter,
+            completed_folds,
+        ) = load_checkpoint(checkpoint_path)
+
         logger.info(f"Loaded checkpoint: {len(completed_folds)} folds completed")
+
     else:
         predictions = []
+        fold_metrics = []
+
+        selected_descriptor_counter = Counter()
+        selected_set_counter = Counter()
+
         completed_folds = set()
-
-    selected_descriptor_counter = Counter()
-    selected_set_counter = Counter()
-
-    fold_metrics = []
 
     outer_cv = get_outer_cv(
         cv_type=cv_type,
@@ -480,7 +521,13 @@ def nested_cv_evaluate(
         )
 
         if checkpoint_path is not None:
-            save_checkpoint(predictions, checkpoint_path)
+            save_checkpoint(
+                predictions,
+                fold_metrics,
+                selected_descriptor_counter,
+                selected_set_counter,
+                checkpoint_path,
+            )
 
     pred_df = pd.DataFrame(predictions)
 
@@ -499,18 +546,22 @@ def nested_cv_evaluate(
     }
     logger.info(f"mae: {metrics['mae']}")
     logger.info(f"rmse: {metrics['rmse']}")
-    logger.info(f"r2: {metrics['r2']}")
+    logger.info(f"r2: {metrics['r2']}\n")
 
     fold_metrics_df = pd.DataFrame(fold_metrics)
 
-    fold_summary = {
-        "mae_mean": float(fold_metrics_df["mae"].mean()),
-        "mae_std": float(fold_metrics_df["mae"].std(ddof=1)),
-        "rmse_mean": float(fold_metrics_df["rmse"].mean()),
-        "rmse_std": float(fold_metrics_df["rmse"].std(ddof=1)),
-        "r2_mean": float(fold_metrics_df["r2"].mean()),
-        "r2_std": float(fold_metrics_df["r2"].std(ddof=1)),
-    }
+    if fold_metrics_df.empty:
+        fold_summary = None
+
+    else:
+        fold_summary = {
+            "mae_mean": float(fold_metrics_df["mae"].mean()),
+            "mae_std": float(fold_metrics_df["mae"].std(ddof=1)),
+            "rmse_mean": float(fold_metrics_df["rmse"].mean()),
+            "rmse_std": float(fold_metrics_df["rmse"].std(ddof=1)),
+            "r2_mean": float(fold_metrics_df["r2"].mean()),
+            "r2_std": float(fold_metrics_df["r2"].std(ddof=1)),
+        }
 
     selection_summary = {
         "feature_frequency": {
@@ -664,12 +715,12 @@ def train(
     checkpoint_path = (
         Path(__file__).resolve().parent.parent
         / "out/logs/checkpoints"
-        / f"{file_name}_checkpoint.csv"
+        / f"{file_name}_checkpoint.json"
     )
     checkpoint_path_permutation = (
         Path(__file__).resolve().parent.parent
         / "out/logs/checkpoints"
-        / f"{file_name}_permutation_checkpoint.csv"
+        / f"{file_name}_permutation_checkpoint.json"
     )
     checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
     checkpoint_path_permutation.parent.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,85 @@
+{
+  "n_rows_after_dropna": 27,
+  "n_descriptors": 15,
+  "descriptors": [
+    "sasa",
+    "polar",
+    "h_nbo_charge",
+    "o_nbo_charge",
+    "molecular_volume_A3",
+    "dipole_moment_debye",
+    "homo_ev",
+    "lumo_ev",
+    "gap_ev",
+    "omega",
+    "3and6",
+    "4and5",
+    "logp",
+    "hbd",
+    "hba"
+  ],
+  "target": "yield",
+  "method": "ols",
+  "threshold": 0.8,
+  "max_len_descriptors_in_model": 4,
+  "n_combinations": 1426,
+  "cv_metrics": {
+    "loo": {
+      "mae": 1.4712255846708624,
+      "rmse": 1.8136752410822845,
+      "r2": 0.7333790273417103
+    }
+  },
+  "selection_summaries": {
+    "loo": {
+      "feature_frequency": {
+        "sasa": 27,
+        "o_nbo_charge": 16,
+        "omega": 17,
+        "hbd": 27,
+        "lumo_ev": 10,
+        "gap_ev": 5,
+        "homo_ev": 5
+      },
+      "selected_set_frequency": {
+        "sasa,o_nbo_charge,omega,hbd": 16,
+        "sasa,lumo_ev,gap_ev,hbd": 5,
+        "sasa,homo_ev,lumo_ev,hbd": 5,
+        "sasa,omega,hbd": 1
+      }
+    }
+  },
+  "permutation_test": null,
+  "external_test_metrics": null,
+  "final_best_on_full_data": {
+    "combi": [
+      "sasa",
+      "o_nbo_charge",
+      "omega",
+      "hbd"
+    ],
+    "inner_cv_mae": 1.3381283927526697,
+    "intercept_": 11.863542500000012,
+    "coef_": [
+      2.574825247247177,
+      0.7213526743214884,
+      1.6621558468822002,
+      -1.6221990960786714
+    ]
+  },
+  "final_best_combi_on_full_data": [
+    "sasa",
+    "o_nbo_charge",
+    "omega",
+    "hbd"
+  ],
+  "elapsed_seconds": 13345.588,
+  "fold_metrics_summary": {
+    "mae_mean": 1.4712255846708624,
+    "mae_std": 1.0808233203721735,
+    "rmse_mean": 1.4712255846708624,
+    "rmse_std": 1.0808233203721735,
+    "r2_mean": NaN,
+    "r2_std": NaN
+  }
+}

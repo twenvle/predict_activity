@@ -33,7 +33,7 @@ def screening(
             atomic_num = atom.GetAtomicNum()
             if (
                 (3 <= atomic_num <= 4)
-                or (11 < atomic_num <= 13)
+                or (11 <= atomic_num <= 13)
                 or (19 <= atomic_num <= 32)
                 or (37 <= atomic_num <= 51)
                 or (55 <= atomic_num <= 84)

@@ -1,0 +1,105 @@
+{
+  "n_rows_after_dropna": 27,
+  "n_descriptors": 15,
+  "descriptors": [
+    "sasa",
+    "polar",
+    "h_nbo_charge",
+    "o_nbo_charge",
+    "molecular_volume_A3",
+    "dipole_moment_debye",
+    "homo_ev",
+    "lumo_ev",
+    "gap_ev",
+    "omega",
+    "3and6",
+    "4and5",
+    "logp",
+    "hbd",
+    "hba"
+  ],
+  "target": "selectivity",
+  "method": "blr",
+  "threshold": 0.8,
+  "max_len_descriptors_in_model": 4,
+  "n_combinations": 1426,
+  "cv_metrics": {
+    "loo": {
+      "mae": 9.214501253166727,
+      "rmse": 13.171005681085465,
+      "r2": -0.29929573028338985
+    }
+  },
+  "selection_summaries": {
+    "loo": {
+      "feature_frequency": {
+        "sasa": 5,
+        "o_nbo_charge": 23,
+        "hbd": 7,
+        "dipole_moment_debye": 18,
+        "3and6": 19,
+        "omega": 1,
+        "hba": 1,
+        "logp": 3
+      },
+      "selected_set_frequency": {
+        "sasa,o_nbo_charge,hbd": 4,
+        "o_nbo_charge,dipole_moment_debye,3and6": 17,
+        "sasa,omega,hbd": 1,
+        "hba": 1,
+        "logp": 2,
+        "o_nbo_charge,3and6,logp,hbd": 1,
+        "o_nbo_charge,dipole_moment_debye,3and6,hbd": 1
+      }
+    }
+  },
+  "permutation_test": null,
+  "external_test_metrics": null,
+  "final_best_on_full_data": {
+    "combi": [
+      "o_nbo_charge",
+      "dipole_moment_debye",
+      "3and6"
+    ],
+    "inner_cv_mae": 6.723339132527931,
+    "lambda_": 0.03151801721473018,
+    "sigma_": [
+      [
+        1.9666924379150583,
+        0.02032527829609884,
+        -0.26871903479489917
+      ],
+      [
+        0.02032527829609882,
+        1.9782277684174487,
+        0.308950714236962
+      ],
+      [
+        -0.2687190347948991,
+        0.30895071423696197,
+        2.0147341388794233
+      ]
+    ],
+    "alpha_": 0.018033877677372714,
+    "coef_": [
+      6.336263465958099,
+      -3.1621751960061446,
+      -6.251130198453208
+    ],
+    "intercept_": 42.732962962962986
+  },
+  "final_best_combi_on_full_data": [
+    "o_nbo_charge",
+    "dipole_moment_debye",
+    "3and6"
+  ],
+  "elapsed_seconds": 11331.652,
+  "fold_metrics_summary": {
+    "mae_mean": 9.214501253166727,
+    "mae_std": 9.590351014827165,
+    "rmse_mean": 9.214501253166727,
+    "rmse_std": 9.590351014827165,
+    "r2_mean": NaN,
+    "r2_std": NaN
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "n_rows_after_dropna": 27,
+  "n_descriptors": 15,
+  "descriptors": [
+    "sasa",
+    "polar",
+    "h_nbo_charge",
+    "o_nbo_charge",
+    "molecular_volume_A3",
+    "dipole_moment_debye",
+    "homo_ev",
+    "lumo_ev",
+    "gap_ev",
+    "omega",
+    "3and6",
+    "4and5",
+    "logp",
+    "hbd",
+    "hba"
+  ],
+  "target": "selectivity",
+  "method": "blr",
+  "threshold": 0.8,
+  "max_len_descriptors_in_model": 4,
+  "n_combinations": 1426,
+  "cv_metrics": {
+    "kfold": {
+      "mae": 9.747502505171568,
+      "rmse": 13.739009652471472,
+      "r2": -0.4137772680929914
+    }
+  },
+  "selection_summaries": {
+    "kfold": {
+      "feature_frequency": {
+        "o_nbo_charge": 5,
+        "gap_ev": 1,
+        "4and5": 1,
+        "3and6": 2,
+        "dipole_moment_debye": 2,
+        "sasa": 2,
+        "hba": 1
+      },
+      "selected_set_frequency": {
+        "o_nbo_charge,gap_ev,4and5": 1,
+        "o_nbo_charge,3and6": 1,
+        "o_nbo_charge,dipole_moment_debye,3and6": 1,
+        "sasa,o_nbo_charge,hba": 1,
+        "sasa,o_nbo_charge,dipole_moment_debye": 1
+      }
+    }
+  },
+  "permutation_test": null,
+  "external_test_metrics": null,
+  "final_best_on_full_data": {
+    "combi": [
+      "o_nbo_charge",
+      "dipole_moment_debye",
+      "3and6"
+    ],
+    "inner_cv_mae": 6.723339132527931,
+    "lambda_": 0.03151801721473018,
+    "sigma_": [
+      [
+        1.9666924379150583,
+        0.02032527829609884,
+        -0.26871903479489917
+      ],
+      [
+        0.02032527829609882,
+        1.9782277684174487,
+        0.308950714236962
+      ],
+      [
+        -0.2687190347948991,
+        0.30895071423696197,
+        2.0147341388794233
+      ]
+    ],
+    "alpha_": 0.018033877677372714,
+    "coef_": [
+      6.336263465958099,
+      -3.1621751960061446,
+      -6.251130198453208
+    ],
+    "intercept_": 42.732962962962986
+  },
+  "final_best_combi_on_full_data": [
+    "o_nbo_charge",
+    "dipole_moment_debye",
+    "3and6"
+  ],
+  "elapsed_seconds": 2651.591,
+  "fold_metrics_summary": {
+    "mae_mean": 9.761146406706864,
+    "mae_std": 3.084337307459882,
+    "rmse_mean": 13.06753277286887,
+    "rmse_std": 5.157955205307371,
+    "r2_mean": -3.615923861182041,
+    "r2_std": 4.909922660759318
+  }
+}

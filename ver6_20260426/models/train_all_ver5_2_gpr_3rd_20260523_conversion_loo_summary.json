@@ -1,0 +1,125 @@
+{
+  "n_rows_after_dropna": 27,
+  "n_descriptors": 15,
+  "descriptors": [
+    "sasa",
+    "polar",
+    "h_nbo_charge",
+    "o_nbo_charge",
+    "molecular_volume_A3",
+    "dipole_moment_debye",
+    "homo_ev",
+    "lumo_ev",
+    "gap_ev",
+    "omega",
+    "3and6",
+    "4and5",
+    "logp",
+    "hbd",
+    "hba"
+  ],
+  "target": "conversion",
+  "method": "gpr",
+  "threshold": 0.8,
+  "max_len_descriptors_in_model": 4,
+  "n_combinations": 1426,
+  "cv_metrics": {
+    "loo": {
+      "mae": 5.4656783910221165,
+      "rmse": 7.245157407581018,
+      "r2": -0.3674861243162397
+    }
+  },
+  "selection_summaries": {
+    "loo": {
+      "feature_frequency": {
+        "h_nbo_charge": 25,
+        "o_nbo_charge": 23,
+        "omega": 11,
+        "hba": 12,
+        "hbd": 6,
+        "homo_ev": 2,
+        "gap_ev": 1,
+        "3and6": 2,
+        "4and5": 1,
+        "lumo_ev": 9,
+        "sasa": 1,
+        "dipole_moment_debye": 5,
+        "molecular_volume_A3": 8,
+        "polar": 1
+      },
+      "selected_set_frequency": {
+        "h_nbo_charge,o_nbo_charge,omega,hba": 4,
+        "h_nbo_charge,o_nbo_charge,omega,hbd": 4,
+        "h_nbo_charge,o_nbo_charge,homo_ev,hbd": 1,
+        "gap_ev,3and6,4and5,hbd": 1,
+        "h_nbo_charge,o_nbo_charge,lumo_ev,hba": 6,
+        "sasa,dipole_moment_debye,omega,hba": 1,
+        "h_nbo_charge,o_nbo_charge,molecular_volume_A3,dipole_moment_debye": 3,
+        "h_nbo_charge,o_nbo_charge,molecular_volume_A3,omega": 1,
+        "h_nbo_charge,o_nbo_charge,molecular_volume_A3,homo_ev": 1,
+        "h_nbo_charge,o_nbo_charge,molecular_volume_A3,lumo_ev": 3,
+        "polar,h_nbo_charge,3and6": 1,
+        "h_nbo_charge,dipole_moment_debye,omega,hba": 1
+      }
+    }
+  },
+  "permutation_test": null,
+  "external_test_metrics": null,
+  "final_best_on_full_data": {
+    "combi": [
+      "h_nbo_charge",
+      "o_nbo_charge",
+      "omega",
+      "hbd"
+    ],
+    "inner_cv_mae": 3.529974067877689,
+    "kernel": "1**2 * Matern(length_scale=[1, 1, 1, 1], nu=1.5) + WhiteKernel(noise_level=1)",
+    "alpha_": [
+      0.045829385273070386,
+      -0.8801089019302873,
+      1.3107939066590621,
+      3.606115844603161,
+      -1.5574893136553616,
+      3.959358797223819,
+      -5.546376523902063,
+      -2.126542742076752,
+      5.044808828973775,
+      -1.2428522104625888,
+      0.3580350782455322,
+      -2.122748270411353,
+      -0.39952906736615246,
+      0.9750080710181156,
+      0.6959102171697783,
+      -0.3746848809243405,
+      1.6295068848526952,
+      -0.26760127333631845,
+      -0.4837567808035494,
+      -0.09416008812899085,
+      -0.7428662228293667,
+      0.4146305866711689,
+      -0.788044697369768,
+      -0.07158463570958667,
+      -0.9984405819192399,
+      -1.30682432724833,
+      -0.02339253059338781
+    ],
+    "kernel_": "1.7**2 * Matern(length_scale=[2.13, 3.29, 2.72, 8.81], nu=1.5) + WhiteKernel(noise_level=0.0913)",
+    "alpha": 1e-10
+  },
+  "final_best_combi_on_full_data": [
+    "h_nbo_charge",
+    "o_nbo_charge",
+    "omega",
+    "hbd"
+  ],
+  "elapsed_seconds": 8290.41,
+  "fold_metrics_summary": {
+    "mae_mean": 5.4656783910221165,
+    "mae_std": 4.84650536602874,
+    "rmse_mean": 5.4656783910221165,
+    "rmse_std": 4.84650536602874,
+    "r2_mean": NaN,
+    "r2_std": NaN
+  }
+}

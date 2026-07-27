@@ -1,0 +1,114 @@
+{
+  "n_rows_after_dropna": 27,
+  "n_descriptors": 15,
+  "descriptors": [
+    "sasa",
+    "polar",
+    "h_nbo_charge",
+    "o_nbo_charge",
+    "molecular_volume_A3",
+    "dipole_moment_debye",
+    "homo_ev",
+    "lumo_ev",
+    "gap_ev",
+    "omega",
+    "3and6",
+    "4and5",
+    "logp",
+    "hbd",
+    "hba"
+  ],
+  "target": "conversion",
+  "method": "gpr",
+  "threshold": 0.8,
+  "max_len_descriptors_in_model": 4,
+  "n_combinations": 1426,
+  "cv_metrics": {
+    "kfold": {
+      "mae": 6.093082390775322,
+      "rmse": 8.486753333055987,
+      "r2": -0.876335246860833
+    }
+  },
+  "selection_summaries": {
+    "kfold": {
+      "feature_frequency": {
+        "polar": 1,
+        "gap_ev": 1,
+        "4and5": 1,
+        "hbd": 2,
+        "sasa": 1,
+        "h_nbo_charge": 4,
+        "lumo_ev": 2,
+        "hba": 3,
+        "o_nbo_charge": 2,
+        "molecular_volume_A3": 1
+      },
+      "selected_set_frequency": {
+        "polar,gap_ev,4and5,hbd": 1,
+        "sasa,h_nbo_charge,lumo_ev,hba": 1,
+        "h_nbo_charge,o_nbo_charge,hba": 1,
+        "h_nbo_charge,molecular_volume_A3,hbd": 1,
+        "h_nbo_charge,o_nbo_charge,lumo_ev,hba": 1
+      }
+    }
+  },
+  "permutation_test": null,
+  "external_test_metrics": null,
+  "final_best_on_full_data": {
+    "combi": [
+      "h_nbo_charge",
+      "o_nbo_charge",
+      "omega",
+      "hbd"
+    ],
+    "inner_cv_mae": 3.529974067877689,
+    "kernel": "1**2 * Matern(length_scale=[1, 1, 1, 1], nu=1.5) + WhiteKernel(noise_level=1)",
+    "alpha_": [
+      0.045829385273070386,
+      -0.8801089019302873,
+      1.3107939066590621,
+      3.606115844603161,
+      -1.5574893136553616,
+      3.959358797223819,
+      -5.546376523902063,
+      -2.126542742076752,
+      5.044808828973775,
+      -1.2428522104625888,
+      0.3580350782455322,
+      -2.122748270411353,
+      -0.39952906736615246,
+      0.9750080710181156,
+      0.6959102171697783,
+      -0.3746848809243405,
+      1.6295068848526952,
+      -0.26760127333631845,
+      -0.4837567808035494,
+      -0.09416008812899085,
+      -0.7428662228293667,
+      0.4146305866711689,
+      -0.788044697369768,
+      -0.07158463570958667,
+      -0.9984405819192399,
+      -1.30682432724833,
+      -0.02339253059338781
+    ],
+    "kernel_": "1.7**2 * Matern(length_scale=[2.13, 3.29, 2.72, 8.81], nu=1.5) + WhiteKernel(noise_level=0.0913)",
+    "alpha": 1e-10
+  },
+  "final_best_combi_on_full_data": [
+    "h_nbo_charge",
+    "o_nbo_charge",
+    "omega",
+    "hbd"
+  ],
+  "elapsed_seconds": 9331.234,
+  "fold_metrics_summary": {
+    "mae_mean": 6.095539062958515,
+    "mae_std": 1.9687656763503674,
+    "rmse_mean": 8.221589470101126,
+    "rmse_std": 2.4942538769682585,
+    "r2_mean": -1.6861904281864148,
+    "r2_std": 0.8544075717173378
+  }
+}

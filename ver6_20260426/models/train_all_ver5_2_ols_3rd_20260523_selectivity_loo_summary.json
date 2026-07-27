@@ -1,0 +1,92 @@
+{
+  "n_rows_after_dropna": 27,
+  "n_descriptors": 15,
+  "descriptors": [
+    "sasa",
+    "polar",
+    "h_nbo_charge",
+    "o_nbo_charge",
+    "molecular_volume_A3",
+    "dipole_moment_debye",
+    "homo_ev",
+    "lumo_ev",
+    "gap_ev",
+    "omega",
+    "3and6",
+    "4and5",
+    "logp",
+    "hbd",
+    "hba"
+  ],
+  "target": "selectivity",
+  "method": "ols",
+  "threshold": 0.8,
+  "max_len_descriptors_in_model": 4,
+  "n_combinations": 1426,
+  "cv_metrics": {
+    "loo": {
+      "mae": 8.681405610208284,
+      "rmse": 12.97365252017456,
+      "r2": -0.26065038496593584
+    }
+  },
+  "selection_summaries": {
+    "loo": {
+      "feature_frequency": {
+        "sasa": 7,
+        "o_nbo_charge": 26,
+        "hbd": 8,
+        "dipole_moment_debye": 3,
+        "3and6": 19,
+        "hba": 15,
+        "molecular_volume_A3": 6,
+        "h_nbo_charge": 1,
+        "4and5": 1,
+        "logp": 3
+      },
+      "selected_set_frequency": {
+        "sasa,o_nbo_charge,hbd": 7,
+        "o_nbo_charge,dipole_moment_debye,3and6": 2,
+        "o_nbo_charge,3and6,hba": 7,
+        "o_nbo_charge,molecular_volume_A3,3and6,hba": 6,
+        "h_nbo_charge,o_nbo_charge,3and6,4and5": 1,
+        "o_nbo_charge,3and6,logp,hba": 2,
+        "logp": 1,
+        "o_nbo_charge,dipole_moment_debye,3and6,hbd": 1
+      }
+    }
+  },
+  "permutation_test": null,
+  "external_test_metrics": null,
+  "final_best_on_full_data": {
+    "combi": [
+      "o_nbo_charge",
+      "molecular_volume_A3",
+      "3and6",
+      "hba"
+    ],
+    "inner_cv_mae": 5.8492661788425515,
+    "intercept_": 42.732962962962986,
+    "coef_": [
+      6.760273419820792,
+      1.8199798470263717,
+      -6.298504088128915,
+      -2.962368423441815
+    ]
+  },
+  "final_best_combi_on_full_data": [
+    "o_nbo_charge",
+    "molecular_volume_A3",
+    "3and6",
+    "hba"
+  ],
+  "elapsed_seconds": 5088.779,
+  "fold_metrics_summary": {
+    "mae_mean": 8.681405610208284,
+    "mae_std": 9.824653294572572,
+    "rmse_mean": 8.681405610208284,
+    "rmse_std": 9.824653294572572,
+    "r2_mean": NaN,
+    "r2_std": NaN
+  }
+}

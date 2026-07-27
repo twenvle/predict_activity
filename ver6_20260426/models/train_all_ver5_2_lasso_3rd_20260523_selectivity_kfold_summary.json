@@ -1,0 +1,91 @@
+{
+  "n_rows_after_dropna": 27,
+  "n_descriptors": 15,
+  "descriptors": [
+    "sasa",
+    "polar",
+    "h_nbo_charge",
+    "o_nbo_charge",
+    "molecular_volume_A3",
+    "dipole_moment_debye",
+    "homo_ev",
+    "lumo_ev",
+    "gap_ev",
+    "omega",
+    "3and6",
+    "4and5",
+    "logp",
+    "hbd",
+    "hba"
+  ],
+  "target": "selectivity",
+  "method": "lasso",
+  "threshold": 0.8,
+  "max_len_descriptors_in_model": 4,
+  "n_combinations": 1426,
+  "cv_metrics": {
+    "kfold": {
+      "mae": 10.286980937915578,
+      "rmse": 15.044489447757657,
+      "r2": -0.6952160096343909
+    }
+  },
+  "selection_summaries": {
+    "kfold": {
+      "feature_frequency": {
+        "polar": 1,
+        "o_nbo_charge": 4,
+        "4and5": 1,
+        "hba": 1,
+        "3and6": 3,
+        "hbd": 1,
+        "dipole_moment_debye": 2,
+        "h_nbo_charge": 2,
+        "homo_ev": 1,
+        "omega": 1
+      },
+      "selected_set_frequency": {
+        "polar,o_nbo_charge,4and5,hba": 1,
+        "o_nbo_charge,3and6,hbd": 1,
+        "o_nbo_charge,dipole_moment_debye,3and6": 1,
+        "h_nbo_charge,dipole_moment_debye,homo_ev,omega": 1,
+        "h_nbo_charge,o_nbo_charge,3and6": 1
+      }
+    }
+  },
+  "permutation_test": null,
+  "external_test_metrics": null,
+  "final_best_on_full_data": {
+    "combi": [
+      "o_nbo_charge",
+      "molecular_volume_A3",
+      "3and6",
+      "hba"
+    ],
+    "inner_cv_mae": 5.849300500340664,
+    "intercept_": 42.732962962962986,
+    "coef_": [
+      6.760178763279557,
+      1.8200115397214813,
+      -6.298413562187946,
+      -2.962278346078802
+    ],
+    "l1_ratio": 1.0,
+    "alpha": 0.0001
+  },
+  "final_best_combi_on_full_data": [
+    "o_nbo_charge",
+    "molecular_volume_A3",
+    "3and6",
+    "hba"
+  ],
+  "elapsed_seconds": 7106.828,
+  "fold_metrics_summary": {
+    "mae_mean": 10.371970478336506,
+    "mae_std": 4.259017774065505,
+    "rmse_mean": 13.969671521061269,
+    "rmse_std": 6.990392783459804,
+    "r2_mean": -3.740362283124038,
+    "r2_std": 5.000199462883166
+  }
+}

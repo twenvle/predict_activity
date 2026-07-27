@@ -1,0 +1,110 @@
+{
+  "n_rows_after_dropna": 27,
+  "n_descriptors": 15,
+  "descriptors": [
+    "sasa",
+    "polar",
+    "h_nbo_charge",
+    "o_nbo_charge",
+    "molecular_volume_A3",
+    "dipole_moment_debye",
+    "homo_ev",
+    "lumo_ev",
+    "gap_ev",
+    "omega",
+    "3and6",
+    "4and5",
+    "logp",
+    "hbd",
+    "hba"
+  ],
+  "target": "yield",
+  "method": "blr",
+  "threshold": 0.8,
+  "max_len_descriptors_in_model": 4,
+  "n_combinations": 1426,
+  "cv_metrics": {
+    "loo": {
+      "mae": 1.446622130321792,
+      "rmse": 1.7939886438156245,
+      "r2": 0.739135705972539
+    }
+  },
+  "selection_summaries": {
+    "loo": {
+      "feature_frequency": {
+        "sasa": 27,
+        "o_nbo_charge": 20,
+        "omega": 20,
+        "hbd": 27,
+        "homo_ev": 7,
+        "lumo_ev": 7
+      },
+      "selected_set_frequency": {
+        "sasa,o_nbo_charge,omega,hbd": 20,
+        "sasa,homo_ev,lumo_ev,hbd": 7
+      }
+    }
+  },
+  "permutation_test": null,
+  "external_test_metrics": null,
+  "final_best_on_full_data": {
+    "combi": [
+      "sasa",
+      "o_nbo_charge",
+      "omega",
+      "hbd"
+    ],
+    "inner_cv_mae": 1.3444817908349844,
+    "intercept_": 11.863542500000012,
+    "sigma_": [
+      [
+        0.07469437603248573,
+        -0.009885670734533355,
+        0.02048209139791401,
+        -0.014699763747756037
+      ],
+      [
+        -0.009885670734533353,
+        0.09694313839740083,
+        -0.04656088636351513,
+        0.030613798270323764
+      ],
+      [
+        0.02048209139791401,
+        -0.04656088636351513,
+        0.09496994985533726,
+        -0.022277197508234634
+      ],
+      [
+        -0.014699763747756035,
+        0.03061379827032377,
+        -0.022277197508234637,
+        0.08073427425916214
+      ]
+    ],
+    "coef_": [
+      2.494479240974578,
+      0.7486465687502155,
+      1.5917059581974116,
+      -1.5614609853911499
+    ],
+    "alpha_": 0.5255268807500582,
+    "lambda_": 0.33052736164881524
+  },
+  "final_best_combi_on_full_data": [
+    "sasa",
+    "o_nbo_charge",
+    "omega",
+    "hbd"
+  ],
+  "elapsed_seconds": 14309.727,
+  "fold_metrics_summary": {
+    "mae_mean": 1.446622130321792,
+    "mae_std": 1.081191489968215,
+    "rmse_mean": 1.446622130321792,
+    "rmse_std": 1.081191489968215,
+    "r2_mean": NaN,
+    "r2_std": NaN
+  }
+}

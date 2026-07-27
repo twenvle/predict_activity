@@ -1,0 +1,122 @@
+{
+  "n_rows_after_dropna": 27,
+  "n_descriptors": 15,
+  "descriptors": [
+    "sasa",
+    "polar",
+    "h_nbo_charge",
+    "o_nbo_charge",
+    "molecular_volume_A3",
+    "dipole_moment_debye",
+    "homo_ev",
+    "lumo_ev",
+    "gap_ev",
+    "omega",
+    "3and6",
+    "4and5",
+    "logp",
+    "hbd",
+    "hba"
+  ],
+  "target": "selectivity",
+  "method": "ols",
+  "threshold": 0.8,
+  "max_len_descriptors_in_model": 4,
+  "n_combinations": 1426,
+  "cv_metrics": {
+    "repeated_kfold": {
+      "mae": 9.017189344452264,
+      "rmse": 13.162005413169082,
+      "r2": -0.2975206169064639
+    }
+  },
+  "selection_summaries": {
+    "repeated_kfold": {
+      "feature_frequency": {
+        "o_nbo_charge": 30,
+        "homo_ev": 14,
+        "4and5": 4,
+        "3and6": 25,
+        "dipole_moment_debye": 15,
+        "logp": 4,
+        "h_nbo_charge": 15,
+        "omega": 5,
+        "sasa": 19,
+        "molecular_volume_A3": 4,
+        "hbd": 13,
+        "lumo_ev": 2,
+        "hba": 8,
+        "polar": 4,
+        "gap_ev": 1
+      },
+      "selected_set_frequency": {
+        "o_nbo_charge,homo_ev,4and5": 1,
+        "o_nbo_charge,3and6": 3,
+        "o_nbo_charge,dipole_moment_debye,3and6,logp": 1,
+        "h_nbo_charge,dipole_moment_debye,homo_ev,omega": 1,
+        "h_nbo_charge,o_nbo_charge,3and6": 2,
+        "o_nbo_charge,dipole_moment_debye,3and6": 6,
+        "sasa,molecular_volume_A3,omega,hbd": 2,
+        "sasa,h_nbo_charge,dipole_moment_debye": 1,
+        "h_nbo_charge,o_nbo_charge": 2,
+        "sasa,dipole_moment_debye,lumo_ev": 1,
+        "sasa,homo_ev,logp,hbd": 3,
+        "o_nbo_charge,omega,3and6,hba": 1,
+        "sasa,o_nbo_charge,hbd": 1,
+        "sasa,h_nbo_charge,o_nbo_charge": 1,
+        "sasa,polar,homo_ev,hbd": 2,
+        "molecular_volume_A3": 1,
+        "h_nbo_charge,o_nbo_charge,3and6,4and5": 2,
+        "polar,homo_ev,3and6,hbd": 2,
+        "sasa,dipole_moment_debye,lumo_ev,3and6": 1,
+        "o_nbo_charge,dipole_moment_debye,3and6,hbd": 1,
+        "sasa,h_nbo_charge,o_nbo_charge,4and5": 1,
+        "dipole_moment_debye,homo_ev,gap_ev,omega": 1,
+        "o_nbo_charge,3and6,hba": 3,
+        "h_nbo_charge,o_nbo_charge,3and6,hba": 1,
+        "3and6": 1,
+        "sasa,dipole_moment_debye,hbd": 1,
+        "sasa,h_nbo_charge,o_nbo_charge,homo_ev": 1,
+        "o_nbo_charge,molecular_volume_A3,3and6,hba": 1,
+        "sasa,h_nbo_charge,homo_ev,hbd": 1,
+        "homo_ev": 1,
+        "sasa,h_nbo_charge,o_nbo_charge,hba": 1,
+        "sasa,h_nbo_charge,dipole_moment_debye,homo_ev": 1,
+        "sasa,o_nbo_charge,hba": 1
+      }
+    }
+  },
+  "permutation_test": null,
+  "external_test_metrics": null,
+  "final_best_on_full_data": {
+    "combi": [
+      "o_nbo_charge",
+      "molecular_volume_A3",
+      "3and6",
+      "hba"
+    ],
+    "inner_cv_mae": 5.8492661788425515,
+    "intercept_": 42.732962962962986,
+    "coef_": [
+      6.760273419820792,
+      1.8199798470263717,
+      -6.298504088128915,
+      -2.962368423441815
+    ]
+  },
+  "final_best_combi_on_full_data": [
+    "o_nbo_charge",
+    "molecular_volume_A3",
+    "3and6",
+    "hba"
+  ],
+  "elapsed_seconds": 20768.083,
+  "fold_metrics_summary": {
+    "mae_mean": 9.032474534856291,
+    "mae_std": 3.2616091696073752,
+    "rmse_mean": 12.219246675455722,
+    "rmse_std": 5.003956551462757,
+    "r2_mean": -6.835355615382842,
+    "r2_std": 19.992279932588925
+  }
+}
